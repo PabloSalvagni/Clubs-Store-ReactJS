@@ -1,0 +1,87 @@
+@import '../../Global/Reset.scss';
+@import '../../Global/Colors.scss';
+
+.nav {
+
+    display: flex;
+    flex-direction: column;
+    background-color: $navbar__back;
+    
+}
+
+.nav__logo {
+
+    left: 20px;
+    top: 10px;
+    display: block;
+    max-height: 50px;
+    max-width: 150px;
+
+}
+
+.nav__container {
+
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.nav__container--list {
+    display: block;
+    color: $navbar__font;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+.nav__container--list:hover {
+    background-color: $navbar__back--hover
+}
+
+.nav__item {
+    padding: 0 10px;
+}
+
+.nav__link--logout {
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
+select, option {
+
+    border: none;
+    background-color: $navbar__back;
+    color: $navbar__font;
+
+}
+
+select:hover, option:hover {
+
+    border: none;
+    background-color: $navbar__back--hover;
+
+}
+
+.nav__option, select, option {
+
+    background-color: $navbar__back;
+    border: none;
+    padding: 14px 16px;
+    
+}
+
+
+
