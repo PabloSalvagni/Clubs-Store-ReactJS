@@ -27,16 +27,19 @@ export const CartContextProvider = ({ children }) => {
     }
 
     const isInCart = ( item ) => {
-        console.log('isInCart : ', item)
+        console.log('isInCart : ', item, 'cart: ', cart)
         return cart.some(product => product.product === item);
     }   
 
     const removeProduct = ( productId ) => {
-        console.log('removeProduct() :', productId)
+
+        let productToRemove = cart.filter( element => element.product.id !== productId, console.log('productId: ', productId) )
+        setCart(productToRemove)
+
     }
 
     const clearCart = () => {
-        console.log('clearCart()')
+        setCart([])
     }
 
     const getQuantity  = () => {
@@ -50,6 +53,8 @@ export const CartContextProvider = ({ children }) => {
         return count
         
     }
+
+    const getTotal = () => {}
 
     return (
         <CartContext.Provider

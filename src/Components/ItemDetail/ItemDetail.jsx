@@ -97,8 +97,8 @@ const ItemDetail = ( { product }) => {
                     <div className='col col-md-6'>
                         <small>{product?.categoryType} • {product?.category}</small>
                         <h2> { product?.title } </h2>
-                        <h3>${product?.price}</h3>
-                        <p> {product?.detail }</p>
+                        <h3> ${product?.price}</h3>
+                        <p>  {product?.detail }</p>
                         <div>
                             <h3>Tabla de talles</h3>
                             <small>Proximamente</small>
@@ -106,15 +106,15 @@ const ItemDetail = ( { product }) => {
                         <div>
                             {
                                 quantity === 0
-                                ?   <ItemCount product={product} onAdd={(quantity) => addToCart (quantity)} />
-                                :   <div className="card mt-3 mb-3">
-                                        <div className="card-body text-center">
-                                            <small>Agregados <b>{quantity}</b> item/s al carrito.</small><br />
-                                            <Link to={'/cart'}>
-                                                <button type="button" className="btn btn-primary m-2">Ir al Carrito</button>
-                                            </Link>
-                                        </div>
+                                ? <ItemCount product={product} onAdd={(quantity) => addToCart (quantity)} />
+                                : <div className="card mt-3 mb-3">
+                                    <div className="card-body text-center">
+                                        <small>Agregados <b>{quantity}</b> item/s al carrito.</small><br />
+                                        <Link to={'/cart'}>
+                                            <button type="button" className="btn btn-primary m-2">Finalizar la Compra</button>
+                                        </Link>
                                     </div>
+                                </div>
                             }
                         </div>
                     </div>

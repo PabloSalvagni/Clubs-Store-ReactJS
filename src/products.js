@@ -40,7 +40,7 @@ export const getCategory = () => {
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
             resolve(categories)
-        }, 2000 )
+        }, 1000 )
     })
 }
 
@@ -49,7 +49,7 @@ export const getCategoryTypes = () => {
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
             resolve(categoryTypes)
-        }, 2000 )
+        }, 1000 )
     })
 }
 
@@ -60,7 +60,7 @@ export const getProducts = (category) => {
         setTimeout(() =>{
             // Use the TERNARY OPERATOR to check first el array products, filtered the product if category exist, if not, show all the products.
             category ? resolve(products.filter(product => product.categoryType === category)) : resolve(products)
-        }, 2000)
+        }, 1000)
     })
 }
 
@@ -68,7 +68,7 @@ export const getProductById = (id) =>{
     console.log('getProductById()')
     return new Promise ((resolve, reject ) => { 
         const product = products.find(prod => parseInt (prod.id) === parseInt(id))
-        setTimeout( () => resolve(product), 2000 )
+        setTimeout( () => resolve(product), 1000 )
     })
 }
 
@@ -77,7 +77,7 @@ export const getItem = () =>{
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
             resolve(products[5])
-        }, 2000 )
+        }, 1000 )
     })
 
 }

@@ -12,7 +12,7 @@ const NavBar = () => {
     const [categoryTypes, setCategoryTypes] = useState([])
     const {user, logout } = useContext(UserContext)
     const {setNotification } = useContext (NotificationContext)
-    const {cart} = useContext (CartContext)
+    const {cart, getQuantity} = useContext (CartContext)
 
 
     // Get the categoryTypes from products.js
@@ -73,9 +73,12 @@ const NavBar = () => {
                             }
                         </li> 
                         <li className='nav-item nav__item'>
-                            <Link to={'/cart'}>
-                                <CartWidget />
-                            </Link>
+                            {(getQuantity() !== 0) 
+                                ?<Link to={'/cart'}>
+                                    <CartWidget />
+                                </Link>
+                                :<div></div>
+                            }
                         </li>
                     </ul>
                     </span>
