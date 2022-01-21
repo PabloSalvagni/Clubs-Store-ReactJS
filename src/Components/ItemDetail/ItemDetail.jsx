@@ -12,12 +12,9 @@ const ItemDetail = ( { product }) => {
     const { setNotification } = useContext(NotificationContext)
 
     const addToCart = ( quantity ) => {
-
-        console.log('addToCart')
         setNotification(`Agregado ${ quantity } unidades al carrito.`, 'success')
         setQuantity( quantity )
         addItem( product, quantity)
-
     }
 
     return (

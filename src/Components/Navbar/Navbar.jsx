@@ -7,6 +7,10 @@ import UserContext from '../../Context/UserContext'
 import NotificationContext from '../../Context/NotificationContext'
 import CartContext from '../../Context/CartContext'
 
+import { db } from '../../Service/Firebase/Firebase'
+import { collection, getDocs } from 'firebase/firestore';
+
+
 const NavBar = () => {
 
     const [categoryTypes, setCategoryTypes] = useState([])
@@ -14,11 +18,12 @@ const NavBar = () => {
     const {setNotification } = useContext (NotificationContext)
     const {cart, getQuantity} = useContext (CartContext)
 
-
     // Get the categoryTypes from products.js
     useEffect( () =>{
-        getCategoryTypes()
-        .then(categoryTypes => {
+        getDocs((collection(db, 'categoryTypes'))).then(( querySnapshot ) => { 
+            const categoryTypes = querySnapshot.docs.map( doc =>{
+               return { id: doc.id, ...doc.data() }
+            } )
             setCategoryTypes(categoryTypes)
         })
     }, [])
@@ -47,7 +52,7 @@ const NavBar = () => {
                         </li>  
                         
                         {/* LIST with method 'map' the categoryTypes get from useEff  */}
-                        { categoryTypes.map (cat => <li key={cat.id} className="nav-item nav__item"> <Link className="nav-link" to={`/category/${cat.id}`}> {cat.description}</Link></li>)}
+                        { categoryTypes.map (cat => <li key={cat.id} className="nav-item nav__item"> <Link className="nav-link" to={`/category/${cat.id}`}> {cat.Description}</Link></li>)}
 
                         <li className="nav-item nav__item dropdown">
                             <Link to={'/'} className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

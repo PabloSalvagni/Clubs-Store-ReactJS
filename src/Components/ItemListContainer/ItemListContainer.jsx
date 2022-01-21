@@ -19,37 +19,22 @@ const ItemListContainer = () => {
     
     useEffect(() => {
 
-       if(!categoryId){
-            setLoading(true)
-            getDocs(collection(db, 'items')).then( (querySnapshot) => {
-                const products = querySnapshot.docs.map( doc => { 
-                    return { id: doc.id, ...doc.data() }
-                })
-                setProducts(products)
-                
-            } ).catch( (error) => {
-                console.log(`Error searching items `, error);
-
-            }).finally( () =>{
-                setLoading(false)
+        setLoading(true)
+        getDocs(collection(db, 'items')).then( (querySnapshot) => {
+            const products = querySnapshot.docs.map( doc => { 
+                return { id: doc.id, ...doc.data() }
             })
-       } 
-       else 
-       {
-            setLoading(true)
-            getDocs( query(collection (db, 'items'), where ('categoryType', '==', categoryId))).then( (querySnapshot) => {
-                const products = querySnapshot.docs.map( doc => { 
-                    return { id: doc.id, ...doc.data() }
-                })
-                setProducts(products)
-                
-            } ).catch( (error) => {
-                console.log(`Error searching items `, error);
 
-            }).finally( () =>{
-                setLoading(false)
-            })
-       }
+            // Bring all products or categroyType
+            categoryId === undefined ? setProducts(products) : 
+            setProducts( products.filter( (producto) =>  producto.categoryType  === categoryId ))
+
+        }).catch( (error) => {
+            console.log(`Error searching items `, error);
+        }).finally( () =>{
+            setLoading(false)
+        })
+
 
         return (() => {
             setProducts([])

@@ -4,8 +4,6 @@ import Item from '../Item/Item'
 
 const ItemList = ({ products = []}) => {
 
-    console.log(`Products of ItemList :`, products)
-
     return (
         <div className="row justify-content-center">
             { products.map( product =>  <Item  key={product.id}  id= {product.id} product= {product} />)}
