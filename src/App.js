@@ -30,7 +30,7 @@ const  App = () => {
   }, []) 
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid p-0">
 
       <CartContextProvider>
         <NotificationContextProvider>

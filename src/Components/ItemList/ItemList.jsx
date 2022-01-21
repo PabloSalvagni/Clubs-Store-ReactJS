@@ -4,7 +4,7 @@ import Item from '../Item/Item'
 
 const ItemList = ({ products = []}) => {
 
-    // console.log(`Products of ItemList :`, products.length)
+    console.log(`Products of ItemList :`, products)
 
     return (
         <div className="row justify-content-center">

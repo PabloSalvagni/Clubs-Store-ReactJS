@@ -54,23 +54,23 @@ export const getCategoryTypes = () => {
 }
 
 
-export const getProducts = (category) => {
-    console.log('getProducts()')
-    return new Promise ((resolve, reject) =>{
-        setTimeout(() =>{
-            // Use the TERNARY OPERATOR to check first el array products, filtered the product if category exist, if not, show all the products.
-            category ? resolve(products.filter(product => product.categoryType === category)) : resolve(products)
-        }, 1000)
-    })
-}
+// export const getProducts = (category) => {
+//     console.log('getProducts()')
+//     return new Promise ((resolve, reject) =>{
+//         setTimeout(() =>{
+//             // Use the TERNARY OPERATOR to check first el array products, filtered the product if category exist, if not, show all the products.
+//             category ? resolve(products.filter(product => product.categoryType === category)) : resolve(products)
+//         }, 1000)
+//     })
+// }
 
-export const getProductById = (id) =>{
-    console.log('getProductById()')
-    return new Promise ((resolve, reject ) => { 
-        const product = products.find(prod => parseInt (prod.id) === parseInt(id))
-        setTimeout( () => resolve(product), 1000 )
-    })
-}
+// export const getProductById = (id) =>{
+//     console.log('getProductById()')
+//     return new Promise ((resolve, reject ) => { 
+//         const product = products.find(prod => parseInt (prod.id) === parseInt(id))
+//         setTimeout( () => resolve(product), 1000 )
+//     })
+// }
 
 export const getItem = () =>{
 

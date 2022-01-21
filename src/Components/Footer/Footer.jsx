@@ -3,7 +3,7 @@ import './style.scss'
 
 const Footer = () => {
     return (
-        <div className="footer container">
+        <div className="footer container-fluid p-0">
             <footer className="py-3 my-4">
                 <p className="text-center text-muted">© 2022 Venta de ropa deportiva de clubes.</p>
             </footer>

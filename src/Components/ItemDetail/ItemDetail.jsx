@@ -5,73 +5,8 @@ import NotificationContext  from '../../Context/NotificationContext'
 import CartContext  from '../../Context/CartContext'
 import { Link } from 'react-router-dom'
 
-
-// ItemCount WITH Input Text
-/*
-const InputCount = ( {onConfirm, maxQuantity } ) => {
-
-    const [count, setCount ] = useState(0)
-    const handleChange = ( {target} ) => {
-        if(target.value <= maxQuantity && target.value >= 0){
-            setCount(target.value)
-        }
-    }
-
-    return (
-        <div className="card mt-3 mb-3 w-50">
-            <div className="card-body">
-                <input type="number" className='text-center w-100' onChange={ handleChange} value={count} />
-                <button type="button" className="btn btn-primary mt-3 mb-3 w-100" onClick={ () => onConfirm(count) }>Agregar al Carrito</button>
-            </div>
-        </div>
-    )
-}
-*/
-
-// ItemCount WITH add and remove buttons.
-/*
-const ButtonCount = ( { onConfirm, maxQuantity } ) => {
-
-    const [count, setCount] = useState(0)
-    
-    const addProduct = () =>{
-        if(count < maxQuantity){
-            setCount( count + 1 )
-        }
-    }
-
-    const remProduct = () =>{
-        if(maxQuantity > 0){
-            setCount( count - 1 )
-        }
-    }  
-    
-
-    return (
-
-        <div className="card mt-3 mb-3">
-            <div className="card-body text-center">
-                <div className='text-center'>
-                    <button type="button" className="btn btn-secondary m-2" onClick={remProduct}>-</button>
-                    <input type="text" value={count} className='w-25 text-center'/>
-                    <button type="button" className="btn btn-secondary m-2" onClick={addProduct}>+</button>
-                </div>
-                <button type="button" className="btn btn-primary m-2 w-25" onClick={ () => onConfirm(count) }>
-                    Agregar al Carrito
-                </button>
-                <p className="text-center">Stock: {maxQuantity}</p>
-            </div>
-        </div>
-    
-    )
-
-}
-*/
-
-
 const ItemDetail = ( { product }) => {
  
-
     const { addItem } = useContext( CartContext )
     const [ quantity, setQuantity ] = useState(0)
     const { setNotification } = useContext(NotificationContext)
