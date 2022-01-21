@@ -6,7 +6,7 @@ import './Cart.css'
 
 const Cart = () => {
 
-    const { cart, getQuantity, removeProduct, clearCart } = useContext(CartContext)
+    const { cart, getQuantity, removeProduct, clearCart, getTotalPrice } = useContext(CartContext)
 
     console.log('cart: ', cart)
 
@@ -17,21 +17,24 @@ const Cart = () => {
             {( getQuantity() !== 0)
                     
                     ?<div className='row'>
-                        <div className='col col-md-7 p-4'>
+                        <div className='col col-md-8 p-4'>
                             <h4>PRODUCTOS ({ getQuantity() })</h4>
                             <div className='p-2'>
                                 {cart.map ( e => {
                                     console.log(e.id)
                                     return  <div key={e.product.id} className='row item__container'>
-                                                <div className='col-md-4 p-0'>
+                                                <div className='col-md-5 p-0'>
                                                     <img className="mx-auto d-block w-100 item__container--img" src={e.product.thumbnail} alt={e.product.title} />
                                                 </div>
-                                                <div className='col-md-7 item__container--info'>
+                                                <div className='col-md-6 item__container--info'>
                                                     <p className='item__container--info--titulo'>{ e.product.title }</p>
                                                     <p className='item__container--info--txt'>
                                                         {e.product.categoryType} • {e.product.category} <br />
                                                         Valor: ${e.product.price}<br />
-                                                        Cantidad: { e.quantity }
+                                                        Cantidad: { e.quantity }<br />
+                                                    </p> 
+                                                    <p className='item__container--info--txt'>
+                                                        <b> SUBTOTAL: ${ e.product.price * e.quantity } </b>
                                                     </p>
                                                 </div>
                                                 <div className='col-md-1 text-center item__container--btns'>
@@ -42,10 +45,21 @@ const Cart = () => {
                                             </div>
                                 })}
                              </div>
-                            <div className='item_click'  onClick={ () =>{ clearCart() }} >Vaciar Carrito</div>
+                            
                         </div>
-                        <div className='col col-md-5  p-4'>
-                            Resumen de cuenta
+                        <div className='col col-md-4 p-4'>
+                            <h4>Resumen del Pedido</h4>
+                            <hr />
+                            <h4 className='item__container--info--txt' >Cantidad de productos: { getQuantity() }</h4>
+                            <h4 className='item__container--info--txt' >Subtotal: <b>$ { getTotalPrice() } </b></h4>
+                            <h4 className='item__container--info--txt' >Costo de Envio: Gratis </h4>
+                            <hr />
+                            <h2>TOTAL: ${ getTotalPrice() }</h2>
+                            <hr />
+                            <div className='text-center'>
+                                <button type='button' className='btn btn-primary item_click m-1'  onClick={ () =>{ }} >Confirmar Compra</button>
+                                <button type='button' className='btn btn-primary item_click m-1'  onClick={ () =>{ clearCart() }} >Vaciar Carrito</button>
+                            </div>
                         </div>
                     </div>
 

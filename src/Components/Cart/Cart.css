@@ -18,6 +18,7 @@
 .item__container--img {
     margin: 0px;
     padding: 0px;
+    height: 100%;
 }
 .item__container--info {
     padding-top: 1.5rem;
@@ -26,6 +27,7 @@
 
 .item__container--info--titulo {font-size: 1.5rem;}
 .item__container--info--txt {font-size: 1rem;}
+.item__container--info--span {font-size: 1rem; margin-right: 5px;}
 
 .item__container--btns {
 

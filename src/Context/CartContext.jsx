@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState } from "react";
 
 // REFERENCE of the Context
 export const CartContext = createContext();
@@ -7,6 +7,7 @@ export const CartContext = createContext();
 export const CartContextProvider = ({ children }) => {
 
     const [ cart, setCart] = useState([])
+    const [ totalPrice, setTotalPrice] = useState()
 
     const addItem = ( product, quantity ) => {
        
@@ -25,6 +26,25 @@ export const CartContextProvider = ({ children }) => {
         getQuantity()
 
     }
+
+    const getTotalPrice = () => {
+
+        let tmpProducts = [...cart];
+        let cantProd = tmpProducts.reduce( (previousValue, currentValue) => previousValue + currentValue.quantity, 0);
+        console.log('cantProd: ', cantProd)
+
+        let tmptotalPrice = 0;
+
+        tmpProducts.forEach ( p =>{
+            tmptotalPrice=tmptotalPrice+(p.quantity*p.product.price)
+        })
+        
+        console.log('tmptotalPrice', tmptotalPrice)
+
+        return tmptotalPrice
+
+    }
+
 
     const isInCart = ( item ) => {
         console.log('isInCart : ', item, 'cart: ', cart)
@@ -54,7 +74,7 @@ export const CartContextProvider = ({ children }) => {
         
     }
 
-    const getTotal = () => {}
+    
 
     return (
         <CartContext.Provider
@@ -64,7 +84,8 @@ export const CartContextProvider = ({ children }) => {
                 getQuantity,
                 isInCart, 
                 removeProduct, 
-                clearCart
+                clearCart,
+                getTotalPrice
                 }}
             >
             {children}
