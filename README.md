@@ -8,15 +8,24 @@ html, css, javascript
 # Framework used
 Bootstrap was used to use the grid model on which to "work/will work" in the layout of the site. 
 
-# Installation & Execution
-### Clonar
-`$ git clone ${project ur}`
 
-### Instalar
-`$ npm install`
+## 🛠️ Installation Steps
 
-### Ejecutar
-`$ npm start` (to run test in localhost)
+1. Clone the repository
+
+```bash
+$ git clone https://github.com/PabloSalvagni/ClubsStore.git`
+```
+
+2. Install dependecies
+```bash
+$ npm install`
+```
+
+4. Run the app
+```bash
+$ npm start` (to run test in localhost)
+```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
