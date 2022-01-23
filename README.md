@@ -1,5 +1,5 @@
 # CLUBS STORE from the area 
-A store is created where you can access the different garments that the clubs in my area of influence have, which can be accessed by gender, type of clothing and by clubs.
+Store created to access the different garments that the clubs in my area of influence have, which can be accessed by gender, type of clothing and by clubs.
 All the project done completely with React JS in the Coderhouse course.
 
 ## Languages used in the project 
@@ -9,8 +9,7 @@ html, css, javascript
 Bootstrap was used to use the grid model on which to "work/will work" in the layout of the site. 
 
 
-## 🛠️ Installation Steps
-
+# Installation Steps
 1. Clone the repository
 
 ```bash
@@ -91,6 +90,7 @@ $ npm start` (to run test in localhost)
 ## Componentes
 - `<Navbar>` Component with section and category buttons that it brings from the database. Logic to show `<CartWidget />` 
 - `<CartWidget />` Component that contains the `Cart icon` and `bullet` whith number of products added to the cart.
+-----
 
 - `/ <ItemListContainer />` Component with the logic to obtain the products from the database and make them available to the `<ItemList>` component
 - `/ <ItemList />` Get the products and listing them with `<Item>` component.
@@ -100,10 +100,12 @@ $ npm start` (to run test in localhost)
 - `/ <ItemDetail />` Component whit the logic to 
 - `/ <ItemCount />` Component let add products and add To Cart to continue with the checkout.
 
+----- 
 
 - `/ <Cart />` Component with the logic of listing products, form and checkout process 
+-----
 
-Common components that are used in renderings in different places of the app
+#### Common components that are used in renderings in different places of the app
 - `/ <Loader />` Visible when the app is processing an operation.
 - `/ <Login />` 
 - `/ <Notification />` Component that show de client messages of the App interaction.
@@ -111,13 +113,13 @@ Common components that are used in renderings in different places of the app
 
 
 ## Contexts
+- `Context/Cartcontext` All the functions to operate with the cart in the different components, add products, add, total amounts, remove products from the cart
+- `Context/NotificactionContext`Provides the user with notices about what is happening with the use of the app
+- `Context/UserContext` Gives context to the user's local login.
 
 ## Services
 - `/Firebase.js` Just the conexion to the DB with 'environment Variables' 
- 
-## Data
-The products of the store and functions to consume those is in a javascript "products.js" file in src/ folder.
 
-### Autor
+#### Autor
 Pablo Salvagni, Frontend Developer.
  
