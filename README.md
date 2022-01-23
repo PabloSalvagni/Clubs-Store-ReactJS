@@ -67,9 +67,9 @@ REACT_AAPP_messagingSenderId="value_messagingSenderId"
 REACT_AAPP_appId="value_appId"
 ```
 
-To run the project conected to db, first stop de localhost 
+To run the project conected to db, first stop de localhost
 ```bash
-$ Ctrl + C
+Ctrl + C
 ```
 
 and start again
@@ -78,6 +78,14 @@ $ npm start` (to run test in localhost)
 ```
 
 # Project
+APP routes
+- ** `/ <ItemListContainer />` is the main route **
+- ** `/category/:categoryId` <ItemListContainer/>  filtering by categoryTypes router **
+- ** `/detail/:paramId ` <ItemDetailContainer/>  product detail router**
+- ** `/cart/` <Cart/> the shopping cart router, has the form for buyers and checkout process and show id of the operation **
+- ** `/login` <Login/> local logging to identify the buyer. It is not required for the purchase process **
+- ** `/*` 404 Page not found. **
+
 
 # Componentes
 
