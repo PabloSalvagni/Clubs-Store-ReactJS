@@ -1,14 +1,71 @@
 import React from 'react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CartContext } from '../../Context/CartContext'
-import { Link } from 'react-router-dom'
+import NotificationContext from '../../Context/NotificationContext'
 import './Cart.css'
+import { Link } from 'react-router-dom'
+import { db } from '../../Service/Firebase/Firebase'
+import { collection, addDoc, doc, writeBatch, getDoc } from 'firebase/firestore'
+
+import Loading from '../Loader/Loading'
 
 const Cart = () => {
 
     const { cart, getQuantity, removeProduct, clearCart, getTotalPrice } = useContext(CartContext)
+    const [ loading, setLoading ] = useState(false);
+    const { setNotification } = useContext(NotificationContext)
 
-    console.log('cart: ', cart)
+    const [form, getForm] = useState({ nombre: '', phone: '', email: '' });
+    const fillForm = (e) => {
+        const { name, value } = e.target;
+        getForm({
+            ...form,
+            [name]: value,
+        });
+    };
+
+    const date = new Date()
+
+    const sendOrder =  () => {
+
+        getForm(form)
+        setLoading(true)
+        const newOrder = {
+            buyer: { nameBuyer: form.name, phone: form.phone, email: form.email},
+            items: cart,
+            date: date,
+            total: getTotalPrice(),
+        }
+
+        const batch = writeBatch(db);
+        const outOfStock = [];
+    
+        newOrder.items.forEach((prod) => {
+            getDoc(doc(db, 'items', prod.product.id)).then((qSnapshot) => {
+                if(qSnapshot.data().stock >= prod.quantity) {
+                    batch.update(doc(db, 'items', qSnapshot.id), {
+                        stock: qSnapshot.data().stock - prod.quantity
+                    })
+                } else {
+                    outOfStock.push({ id: qSnapshot.id, ...qSnapshot.data()})
+                    setNotification(`Lo siento pero no hay stock del producto: ${ prod.product.title }`, 'error')
+                }
+            })
+        })
+        
+        // If the array out of stock it's empty.
+        if ( outOfStock.length === 0) {
+            addDoc(collection(db, 'orders'), newOrder).then(( { id } ) =>{
+                batch.commit().then( () =>{
+                    setNotification(`Su NUMERO de orden es: ${ id }.`, 'success')
+                })
+            }).catch (( error ) =>{
+                    console.log(`Error :${error}` )
+            }).finally(()=>{
+                    setLoading(false)
+            })
+        }
+    }
 
     return (
         <article className='container p-5'>
@@ -17,49 +74,74 @@ const Cart = () => {
             {( getQuantity() !== 0)
                     
                     ?<div className='row'>
-                        <div className='col col-md-8 p-4'>
+                        <div className='col-md-8 p-4'>
                             <h4>PRODUCTOS ({ getQuantity() })</h4>
                             <div className='p-2'>
-                                {cart.map ( e => {
-                                    console.log(e.id)
-                                    return  <div key={e.product.id} className='row item__container'>
-                                                <div className='col-md-5 p-0'>
-                                                    <img className="mx-auto d-block w-100 item__container--img" src={e.product.thumbnail} alt={e.product.title} />
-                                                </div>
-                                                <div className='col-md-6 item__container--info'>
-                                                    <p className='item__container--info--titulo'>{ e.product.title }</p>
-                                                    <p className='item__container--info--txt'>
-                                                        {e.product.categoryType} • {e.product.category} <br />
-                                                        Valor: ${e.product.price}<br />
-                                                        Cantidad: { e.quantity }<br />
-                                                    </p> 
-                                                    <p className='item__container--info--txt'>
-                                                        <b> SUBTOTAL: ${ e.product.price * e.quantity } </b>
-                                                    </p>
-                                                </div>
-                                                <div className='col-md-1 text-center item__container--btns'>
-                                                    <div className='item_click' onClick={ () => { removeProduct( e.product.id ) } }>
-                                                        <i class="fas fa-times-circle fas-2x"></i>
-                                                    </div>
+                                {cart.map ( item => {
+                                    return  (
+                                        <div key={item.product.id} className='row item__container'>
+                                            <div className='col-md-5 p-0'>
+                                                <img className="mx-auto d-block w-100 item__container--img" src={item.product.thumbnail} alt={item.product.title} />
+                                            </div>
+                                            <div className='col-md-6 item__container--info'>
+                                                <p className='item__container--info--titulo'>{ item.product.title }</p>
+                                                <p className='item__container--info--txt'>
+                                                    {item.product.categoryType} • {item.product.category} <br />
+                                                    Valor: ${item.product.price}<br />
+                                                    Cantidad: { item.quantity }<br />
+                                                </p> 
+                                                <p className='item__container--info--txt'>
+                                                    <b> SUBTOTAL: ${ item.product.price * item.quantity } </b>
+                                                </p>
+                                            </div>
+                                            <div className='col-md-1 text-center item__container--btns'>
+                                                <div className='item_click' onClick={ () => { removeProduct( item.product.id ) } }>
+                                                    <i className="fas fa-times-circle fas-2x"></i>
                                                 </div>
                                             </div>
+                                        </div>
+                                    )
                                 })}
-                             </div>
-                            
+                             </div>    
                         </div>
-                        <div className='col col-md-4 p-4'>
-                            <h4>Resumen del Pedido</h4>
+
+                        <div className=' col-md-4 p-4'>
+                            
+                            <h4>Resumen del Pedido</h4> 
                             <hr />
-                            <h4 className='item__container--info--txt' >Cantidad de productos: { getQuantity() }</h4>
-                            <h4 className='item__container--info--txt' >Subtotal: <b>$ { getTotalPrice() } </b></h4>
-                            <h4 className='item__container--info--txt' >Costo de Envio: Gratis </h4>
+                                <h4 className='item__container--info--txt' >Cantidad de productos: { getQuantity() }</h4>
+                                <h3 className='item__container--info--txt' >Total: <b>$ { getTotalPrice() } </b></h3>
                             <hr />
-                            <h2>TOTAL: ${ getTotalPrice() }</h2>
-                            <hr />
-                            <div className='text-center'>
-                                <button type='button' className='btn btn-primary item_click m-1'  onClick={ () =>{ }} >Confirmar Compra</button>
-                                <button type='button' className='btn btn-primary item_click m-1'  onClick={ () =>{ clearCart() }} >Vaciar Carrito</button>
-                            </div>
+                            
+                            <p>Para finalizar la compra debes completar los siguientes datos.</p>
+                            
+                            { loading ? <Loading /> :
+                                <form >
+
+                                    <label >Nombre</label>
+                                    <input 
+                                        onChange={ fillForm }  
+                                        className='form-control form__input' 
+                                        type="text"  
+                                        name="name" />
+                                    
+                                    <label >Telefono</label>
+                                    <input onChange={ fillForm } className='form-control form__input' type="text" name="phone" />
+                                       
+                                    <label >Email</label>
+                                    <input onChange={ fillForm } className='form-control form__input'  type="email" name="email" required/>
+                                        
+                                    <div className='text-center'>
+
+                                        <button type='button' className='btn btn-primary item_click m-1 w-100 mb-4' disabled={  form.name === '' || form.email === '' || form.phone === ''} onClick={ sendOrder } > Confirmar Compra </button>
+                                        <button type='button' className='btn btn-primary item_click m-1'  onClick={ () =>{ clearCart() }} >Vaciar Carrito</button>
+                                        <Link to={'/'}><button type='button' className='btn btn-primary item_click m-1 '> Seguir comprando</button></Link>
+
+                                    </div>
+
+                                </form>
+                            }
+
                         </div>
                     </div>
 

@@ -9,16 +9,15 @@ export const CartContextProvider = ({ children }) => {
     const [ cart, setCart] = useState([])
     const [ totalPrice, setTotalPrice] = useState()
 
+
     const addItem = ( product, quantity ) => {
        
         const flag = isInCart(product)
-        console.log('flag : ', flag)
-
+       
         if(flag) {
-
-            let productRepeted = cart.find(element => element.product === product)
+            let productRepeted = cart.find(element => element.product.id === product.id)
             productRepeted.quantity += quantity;
-            let cartNoRepeat = cart.filter( element => element.product !== product); // Bring all but repeated item
+            let cartNoRepeat = cart.filter(element => element.product.id !== product.id); // Bring all but repeated item
             setCart( [...cartNoRepeat, productRepeted]) 
         }else{
             setCart([ ...cart , {product: product, quantity: quantity}]);
@@ -27,11 +26,16 @@ export const CartContextProvider = ({ children }) => {
 
     }
 
+    // Check if the product is in the cart.
+    const isInCart = ( item ) => { 
+        return cart.some( product => product.product.id === item.id );
+    }
+
     const getTotalPrice = () => {
+        console.log('getTotalPrice()')
 
         let tmpProducts = [...cart];
-        let cantProd = tmpProducts.reduce( (previousValue, currentValue) => previousValue + currentValue.quantity, 0);
-        console.log('cantProd: ', cantProd)
+        // let cantProd = tmpProducts.reduce( (previousValue, currentValue) => previousValue + currentValue.quantity, 0);
 
         let tmptotalPrice = 0;
 
@@ -39,20 +43,14 @@ export const CartContextProvider = ({ children }) => {
             tmptotalPrice=tmptotalPrice+(p.quantity*p.product.price)
         })
         
-        console.log('tmptotalPrice', tmptotalPrice)
-
         return tmptotalPrice
 
     }
 
-
-    const isInCart = ( item ) => {
-        console.log('isInCart : ', item, 'cart: ', cart)
-        return cart.some(product => product.product === item);
-    }   
+      
 
     const removeProduct = ( productId ) => {
-
+        
         let productToRemove = cart.filter( element => element.product.id !== productId, console.log('productId: ', productId) )
         setCart(productToRemove)
 
@@ -65,16 +63,11 @@ export const CartContextProvider = ({ children }) => {
     const getQuantity  = () => {
 
         let count = 0;
-
-        cart.forEach(element => {
-            count += element.quantity 
-        });
-
+        cart.forEach(element => count += element.quantity );
         return count
-        
+
     }
 
-    
 
     return (
         <CartContext.Provider

@@ -7,7 +7,7 @@ import Loading from '../Loader/Loading.jsx'
 
 // firebase
 import { db } from '../../Service/Firebase/Firebase.js'
-import { collection , getDocs, query, where} from 'firebase/firestore'
+import { collection , getDocs} from 'firebase/firestore'
 
 const ItemListContainer = () => {
 
@@ -20,8 +20,8 @@ const ItemListContainer = () => {
     useEffect(() => {
 
         setLoading(true)
-        getDocs(collection(db, 'items')).then( (querySnapshot) => {
-            const products = querySnapshot.docs.map( doc => { 
+        getDocs(collection(db, 'items')).then( (qSnapshot) => {
+            const products = qSnapshot.docs.map( doc => { 
                 return { id: doc.id, ...doc.data() }
             })
 
@@ -35,20 +35,17 @@ const ItemListContainer = () => {
             setLoading(false)
         })
 
-
         return (() => {
             setProducts([])
         })
 
     }, [categoryId])
 
-
-    if(loading) { return  ( <Loading /> ) }
+    // if(loading) { return  ( <Loading /> ) }
     
-
     return (
         <div className="text-center p-0 pt-5">
-            <ItemList products={ products } />
+            { loading ? <Loading /> : <ItemList products={ products } />}
         </div>
     )
 }

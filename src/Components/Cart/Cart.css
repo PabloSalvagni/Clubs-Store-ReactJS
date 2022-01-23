@@ -33,3 +33,18 @@
 
     padding: 1rem .5rem 0rem 1rem;
 }
+
+.form__input 
+{
+    border: none!important;
+    border-bottom: 1px solid grey!important;
+    border-radius: 0px!important;
+    margin-bottom: 10px;
+}
+
+.form__small{ 
+    width: 100%!important;
+    display: block  ;
+    color: red;
+    margin-bottom: 20px;
+}

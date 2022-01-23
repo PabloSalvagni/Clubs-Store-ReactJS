@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom'
 
 const ItemDetail = ( { product }) => {
  
-    const { addItem } = useContext( CartContext )
-    const [ quantity, setQuantity ] = useState(0)
     const { setNotification } = useContext(NotificationContext)
+    const [ quantity, setQuantity ] = useState(0)
+    const { addItem } = useContext( CartContext )
 
     const addToCart = ( quantity ) => {
-        setNotification(`Agregado ${ quantity } unidades al carrito.`, 'success')
         setQuantity( quantity )
         addItem( product, quantity)
+        setNotification(`Agregado ${ quantity } unidades al carrito.`, 'success')
     }
 
     return (
@@ -27,10 +27,10 @@ const ItemDetail = ( { product }) => {
                     </div>
 
                     <div className='col col-md-6'>
-                        <small>{product?.categoryType} • {product?.category}</small>
+                        <small> {product?.categoryType} • {product?.category}</small>
                         <h2> { product?.title } </h2>
-                        <h3> ${product?.price}</h3>
-                        <p>  {product?.detail }</p>
+                        <h3> $ {product?.price} </h3>
+                        <p>  {product?.detail } </p>
                         <div>
                             <h3>Tabla de talles</h3>
                             <small>Proximamente</small>
@@ -39,14 +39,14 @@ const ItemDetail = ( { product }) => {
                             {
                                 quantity === 0
                                 ? <ItemCount product={product} onAdd={(quantity) => addToCart (quantity)} />
-                                : <div className="card mt-3 mb-3">
-                                    <div className="card-body text-center">
-                                        <small>Agregados <b>{quantity}</b> item/s al carrito.</small><br />
-                                        <Link to={'/cart'}>
-                                            <button type="button" className="btn btn-primary m-2">Finalizar la Compra</button>
-                                        </Link>
+                                :   <div className="card mt-3 mb-3">
+                                        <div className="card-body text-center">
+                                            <small>Agregados <b>{quantity}</b> item/s al carrito.</small><br />
+                                            <Link to={'/cart'}>
+                                                <button type="button" className="btn btn-primary m-2">Finalizar la Compra</button>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
                             }
                         </div>
                     </div>
