@@ -11,11 +11,15 @@ import Loading from '../Loader/Loading'
 
 const Cart = () => {
 
+    const [ purchase, setPurchase ] = useState(false)
+    const [ order, setOrder] = useState('')
+
     const { cart, getQuantity, removeProduct, clearCart, getTotalPrice } = useContext(CartContext)
     const [ loading, setLoading ] = useState(false);
     const { setNotification } = useContext(NotificationContext)
 
     const [form, getForm] = useState({ nombre: '', phone: '', email: '' });
+
     const fillForm = (e) => {
         const { name, value } = e.target;
         getForm({
@@ -30,6 +34,7 @@ const Cart = () => {
 
         getForm(form)
         setLoading(true)
+        
         const newOrder = {
             buyer: { nameBuyer: form.name, phone: form.phone, email: form.email},
             items: cart,
@@ -49,21 +54,28 @@ const Cart = () => {
                 } else {
                     outOfStock.push({ id: qSnapshot.id, ...qSnapshot.data()})
                     setNotification(`Lo siento pero no hay stock del producto: ${ prod.product.title }`, 'error')
+                    setPurchase(false)
+                    console.log('outOfStock: ', outOfStock.length, ' ------------------------ ')
                 }
             })
-        })
+        }) 
         
         // If the array out of stock it's empty.
-        if ( outOfStock.length === 0) {
-            addDoc(collection(db, 'orders'), newOrder).then(( { id } ) =>{
+        if (outOfStock.length > 0) {
+            
+            addDoc(collection(db, 'orders'), newOrder).then(({id}) => {
                 batch.commit().then( () =>{
-                    setNotification(`Su NUMERO de orden es: ${ id }.`, 'success')
+                    setOrder(id)
+                    setPurchase(true) 
+                    clearCart()
                 })
-            }).catch (( error ) =>{
+            }).catch(( error ) =>{
                     console.log(`Error :${error}` )
-            }).finally(()=>{
-                    setLoading(false)
             })
+            setLoading(false);
+            
+        }else{
+            setLoading(false);
         }
     }
 
@@ -106,7 +118,7 @@ const Cart = () => {
                         </div>
 
                         <div className=' col-md-4 p-4'>
-                            
+
                             <h4>Resumen del Pedido</h4> 
                             <hr />
                                 <h4 className='item__container--info--txt' >Cantidad de productos: { getQuantity() }</h4>
@@ -146,10 +158,17 @@ const Cart = () => {
                     </div>
 
                 :<div>
-                    <h3>No tiendas productos cargados en el carrito.</h3>
-                    <Link to={'/'}>
-                        <button type='button' className='btn btn-primary m-2'>Ir a Comprar</button>
-                    </Link>
+                    { (!purchase)
+                    ?<div>
+                        <h3>No tiendas productos cargados en el carrito.</h3>
+                        <Link to={'/'}> <button type='button' className='btn btn-primary m-2'>Ir a Comprar</button></Link>
+                    </div>
+                    :<div>
+                        <h3>Pedido realizado exitosamente.</h3>
+                        <p>Su numero de orden es: <strong> { order }</strong></p>
+                        <Link to={'/'}> <button type='button' className='btn btn-primary m-2'>Seguir comprando</button></Link>
+                    </div>
+                    }
                 </div>
 
             }

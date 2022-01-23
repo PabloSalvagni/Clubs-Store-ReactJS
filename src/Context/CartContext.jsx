@@ -32,7 +32,7 @@ export const CartContextProvider = ({ children }) => {
     }
 
     const getTotalPrice = () => {
-        console.log('getTotalPrice()')
+        // console.log('getTotalPrice()')
 
         let tmpProducts = [...cart];
         // let cantProd = tmpProducts.reduce( (previousValue, currentValue) => previousValue + currentValue.quantity, 0);
