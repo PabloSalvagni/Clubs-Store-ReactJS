@@ -2,7 +2,7 @@
 A store is created where you can access the different garments that the clubs in my area of influence have, which can be accessed by gender, type of clothing and by clubs.
 All the project done completely with React JS in the Coderhouse course.
 
-# What lenguages did I use to do this project: 
+# languages used in the project 
 html, css, javascript
 
 # Framework used
@@ -10,13 +10,13 @@ Bootstrap was used to use the grid model on which to "work/will work" in the lay
 
 # Installation & Execution
 ### Clonar
-+git clone URL del Proyecto
+`$ git clone ${project ur}`
 
 ### Instalar
-+npm install
+`$ npm install`
 
 ### Ejecutar
-+npm start (to run test in localhost)
+`$ npm start` (to run test in localhost)
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
