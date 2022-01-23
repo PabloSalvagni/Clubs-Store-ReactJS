@@ -58,12 +58,14 @@ The backend is developed in firestore, it has 3 types of files:
 ## Conexion to [Firebase](https://console.firebase.google.com/ "Firebase link")
 Add an .env with firebase data to make the app work
 Replace the 'environment Variables' that you has in /.evn file with database values conexions
+```bash
 REACT_APP_apiKey=“value_apiKey”
 REACT_AAPP_autDomain="value_autDomain"
 REACT_AAPP_projectId-=value_projectId"
 REACT_AAPP_storageBucket=“value_storageBucket"
 REACT_AAPP_messagingSenderId="value_messagingSenderId"
 REACT_AAPP_appId="value_appId"
+```
 
 To run the project conected to db, first stop de localhost 
 ```bash
