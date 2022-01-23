@@ -38,8 +38,9 @@ const NavBar = () => {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
                 <Link className="navbar-brand" to={'/'}>
-                    <h2>#MiTiendaDeClubes</h2>
+                    <h2>#TiendaDEPORTIVA</h2>
                 </Link>
+
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -50,20 +51,7 @@ const NavBar = () => {
                             <Link to={'/'} className="nav-link active">Home</Link>
                         </li>  
                         
-                        {/* LIST with method 'map' the categoryTypes get from useEff  */}
                         { categoryTypes.map (cat => <li key={cat.id} className="nav-item nav__item"> <Link className="nav-link" to={`/category/${cat.id}`}> {cat.Description}</Link></li>)}
-
-                        {/* <li className="nav-item nav__item dropdown">
-                            <Link to={'/'} className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Elige tu Club
-                            </Link>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><Link className="dropdown-item" to={'/'}>Club Cobo</Link></li>
-                                <li><Link className="dropdown-item" to={'/'}>Club Independinete</Link></li>
-                                <li><Link className="dropdown-item" to={'/'}>Club El Tero</Link></li>
-                                <li><Link className="dropdown-item" to={'/'}>Lefu Club</Link></li>
-                            </ul>
-                        </li> */}
 
                     </ul>
                     <span className="nav-item">

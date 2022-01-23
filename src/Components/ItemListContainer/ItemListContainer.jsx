@@ -14,6 +14,7 @@ const ItemListContainer = () => {
     // Load all Products of the list from db
     const [ products, setProducts] = useState([])
     const [ loading, setLoading ] = useState(true);
+    
     // get the category param from url
     const { categoryId } = useParams()
     
@@ -41,7 +42,6 @@ const ItemListContainer = () => {
 
     }, [categoryId])
 
-    // if(loading) { return  ( <Loading /> ) }
     
     return (
         <div className="text-center p-0 pt-5">

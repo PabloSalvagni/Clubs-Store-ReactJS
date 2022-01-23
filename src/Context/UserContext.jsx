@@ -7,7 +7,6 @@ const Context = React.createContext()
 export const UserContextProvider = ({ children }) => {
 
     const [user, setUser ] = useState()
-    // console.log('UserContextProvider: ', user)
 
     const login = (objUser) => {
         setUser(objUser.username)

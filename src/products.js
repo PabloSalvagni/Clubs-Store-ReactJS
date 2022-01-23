@@ -14,35 +14,35 @@
 //     {id: '12', club: "El Tero", title: 'Pantalon N', categoryType: 'niño', category: "ropa", price: 240, thumbnail: 'https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/4f3a3ac57dd24567a855ac36012025ab_9366/Pantalon_de_Entrenamiento_Tiro_21_Azul_GK9659_01_laydown.jpg' , detail: 'Estilo informal de corte bajo. Estas zapatillas lucen las 3 Tiras cosidas en el costado externo y sutiles perforaciones que forman las 3 Tiras en el costado interior.',stock: 42},
 // ];
 
-const categories =[
-    {id:'ropa', description: 'Ropa'},
-    {id:'calzado', description: 'Calzado'},
-    {id:'accesorios', description: 'Accesorios'}
-] 
+// const categories =[
+//     {id:'ropa', description: 'Ropa'},
+//     {id:'calzado', description: 'Calzado'},
+//     {id:'accesorios', description: 'Accesorios'}
+// ] 
 
-// const categoryTypes =[
+// // const categoryTypes =[
 //     {id:'hombre', description: 'Hombres'},
 //     {id:'mujer', description: 'Mujeres'},
 //     {id:'niño', description: 'Niños'}
 
 // ] 
 
-const clubs = [
-    {id:'Cobo', description: 'Club Cobo'},
-    {id:'Independiente', description: 'Independiente'},
-    {id:'LEFU', description: 'LEFU'},
-    {id:'El Tero', description: 'El Tero'}
-] 
+// const clubs = [
+//     {id:'Cobo', description: 'Club Cobo'},
+//     {id:'Independiente', description: 'Independiente'},
+//     {id:'LEFU', description: 'LEFU'},
+//     {id:'El Tero', description: 'El Tero'}
+// ] 
 
  
 // Promise que devuelve la CATEGORIA
-export const getCategory = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(()=>{
-            resolve(categories)
-        }, 1000 )
-    })
-}
+// export const getCategory = () => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(()=>{
+//             resolve(categories)
+//         }, 1000 )
+//     })
+// }
 
 // export const getCategoryTypes = () => {
 //     console.log('getCategoryTypes()')

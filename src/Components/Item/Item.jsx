@@ -4,15 +4,8 @@ import { Link } from 'react-router-dom'
 
 const Item = ({ product }) => {
 
-    // console.log('<Item /> ', product)
-    // const handleClick = (evt) => {
-    //     evt.stopPropagation()
-    //     console.log(`click en Item ${product.id}`);
-    // }
-
     return (
         
-        // <article className="card m-3 p-0"style={{width: "12rem"}} onClick={handleClick}>
         <article className="card m-3 p-0" style={{width: "12rem"}} >
             <img className="card-img-top" src={product.thumbnail} alt={product.title} />
             <div className="card-body">

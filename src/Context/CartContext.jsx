@@ -32,26 +32,22 @@ export const CartContextProvider = ({ children }) => {
     }
 
     const getTotalPrice = () => {
-        // console.log('getTotalPrice()')
-
+       
         let tmpProducts = [...cart];
-        // let cantProd = tmpProducts.reduce( (previousValue, currentValue) => previousValue + currentValue.quantity, 0);
-
+        
         let tmptotalPrice = 0;
 
         tmpProducts.forEach ( p =>{
             tmptotalPrice=tmptotalPrice+(p.quantity*p.product.price)
         })
-        
         return tmptotalPrice
 
     }
 
-      
-
+    
     const removeProduct = ( productId ) => {
         
-        let productToRemove = cart.filter( element => element.product.id !== productId, console.log('productId: ', productId) )
+        let productToRemove = cart.filter( element => element.product.id !== productId )
         setCart(productToRemove)
 
     }
