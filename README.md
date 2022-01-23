@@ -2,10 +2,10 @@
 A store is created where you can access the different garments that the clubs in my area of influence have, which can be accessed by gender, type of clothing and by clubs.
 All the project done completely with React JS in the Coderhouse course.
 
-# languages used in the project 
+## Languages used in the project 
 html, css, javascript
 
-# Framework used
+## Framework used
 Bootstrap was used to use the grid model on which to "work/will work" in the layout of the site. 
 
 
@@ -30,7 +30,7 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
-# Backend
+## Backend
 The backend is developed in firestore, it has 3 types of files:
 
 /items: collecion of products with this structure
@@ -78,24 +78,46 @@ $ npm start` (to run test in localhost)
 ```
 
 # Project
-APP routes
-- ** `/ <ItemListContainer />` is the main route **
-- ** `/category/:categoryId` <ItemListContainer/>  filtering by categoryTypes router **
-- ** `/detail/:paramId ` <ItemDetailContainer/>  product detail router**
-- ** `/cart/` <Cart/> the shopping cart router, has the form for buyers and checkout process and show id of the operation **
-- ** `/login` <Login/> local logging to identify the buyer. It is not required for the purchase process **
-- ** `/*` 404 Page not found. **
+
+### APP Routes  `/ <App />`
+- `/` `<ItemListContainer />` is the main route
+- `/category/:categoryId` `<ItemListContainer/>`  filtering by categoryTypes router
+- `/detail/:paramId ` `<ItemDetailContainer/>`  product detail router
+- `/cart/` `<Cart/>` the shopping cart router, has the form for buyers and checkout process and show id of the operation 
+- `/login` `<Login/>` local logging to identify the buyer. It is not required for the purchase process 
+- `/*` 404 Page not found. **
 
 
-# Componentes
+## Componentes
+- `<Navbar>` Component with section and category buttons that it brings from the database. Logic to show `<CartWidget />` 
+- `<CartWidget />` Component that contains the `Cart icon` and `bullet` whith number of products added to the cart.
 
-# Contexts
+- `/ <ItemListContainer />` Component with the logic to obtain the products from the database and make them available to the `<ItemList>` component
+- `/ <ItemList />` Get the products and listing them with `<Item>` component.
+- `/ <Item />` Card with minimum info of the product + Details Button
 
-# Services
+- `/ <ItemDetailContainer />` Component with the logic to obtain the products from the database and make them available to the `<ItemDetail>` component
+- `/ <ItemDetail />` Component whit the logic to 
+- `/ <ItemCount />` Component let add products and add To Cart to continue with the checkout.
 
-# Data
+
+- `/ <Cart />` Component with the logic of listing products, form and checkout process 
+
+Common components that are used in renderings in different places of the app
+- `/ <Loader />` Visible when the app is processing an operation.
+- `/ <Login />` 
+- `/ <Notification />` Component that show de client messages of the App interaction.
+- `/ <Footer />` 
+
+
+## Contexts
+
+## Services
+- `/Firebase.js` Just the conexion to the DB with 'environment Variables' 
+ 
+## Data
 The products of the store and functions to consume those is in a javascript "products.js" file in src/ folder.
 
-# Autor
+### Autor
 Pablo Salvagni, Frontend Developer.
  
