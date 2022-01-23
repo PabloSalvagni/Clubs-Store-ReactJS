@@ -12,13 +12,11 @@ const ItemDetail = ( { product }) => {
     const { addItem } = useContext( CartContext )
 
     const addToCart = ( quantity ) => {
-        console.log( 'addToCart ', quantity)
         if (quantity !== 0 ) {
             setQuantity( quantity )
             addItem( product, quantity)
             setNotification(`Agregado ${ quantity } unidades al carrito.`, 'success')
         }else{
-            console.log('else', quantity)
             setNotification(`No hay unidades disponibles para agregar al carrito. Elija otro producto.`, 'error')
         }
     }

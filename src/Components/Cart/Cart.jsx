@@ -32,7 +32,6 @@ const Cart = () => {
 
     const sendOrder =  () => {
 
-        console.log('sendOrder')
         getForm(form)
         setLoading(true)
         
@@ -48,7 +47,6 @@ const Cart = () => {
     
         newOrder.items.forEach((prod) => {
             getDoc(doc(db, 'items', prod.product.id)).then((qSnapshot) => {
-                console.log('3.-')
                 if(qSnapshot.data().stock >= prod.quantity) {
                     batch.update(doc(db, 'items', qSnapshot.id), {
                         stock: qSnapshot.data().stock - prod.quantity
