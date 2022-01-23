@@ -1,6 +1,5 @@
 import React from 'react'
 import Item from '../Item/Item'
-// import {TestContext} from '../../App'
 
 const ItemList = ({ products = []}) => {
 
