@@ -1,5 +1,5 @@
 # CLUBS STORE from the area 
-Store created to access the different garments that the clubs in my area of influence have, which can be accessed by gender, type of clothing and by clubs.
+Store created to access the different garments that the clubs in my area of influence have, which can be accessed by gender, type of clothing and by clubs.<br/>
 All the project done completely with React JS in the Coderhouse course.
 
 ## Languages used in the project 
